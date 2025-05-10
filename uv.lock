@@ -1,0 +1,55 @@
+version = 1
+revision = 2
+requires-python = ">=3.11"
+
+[[package]]
+name = "pyosys"
+version = "0.53"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "setuptools" },
+    { name = "wheel" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7c/54/59baec6e27e99934a1fca30e1f8ccae9bd69880da43158c2bd2d315e6753/pyosys-0.53-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:fc25ed3499bcc67008b222c3e4dfc1df690ad2b324fe3dd9ff757d7a622322b8", size = 18716862, upload-time = "2025-05-06T08:12:09.959Z" },
+    { url = "https://files.pythonhosted.org/packages/fa/7b/c9213ca8c5bf4d9e472784d5bf4385c70ab37336421ee63b3412abcdcba4/pyosys-0.53-cp311-cp311-macosx_11_0_x86_64.whl", hash = "sha256:bff02ee06e11d496c79de35b783175ffcea668dbec326ae2bd7294b4dcaa9cad", size = 20641531, upload-time = "2025-05-06T08:12:12.437Z" },
+    { url = "https://files.pythonhosted.org/packages/66/74/90fdfa7a208dbd7643a2c22ea7f38ffee2a2d53153937f2f6bc43b837b4f/pyosys-0.53-cp311-cp311-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:594e815168d7bc090762e8b8f462946b4b29fb1866981768d468e99fefc8fc08", size = 20370614, upload-time = "2025-05-06T08:12:14.635Z" },
+    { url = "https://files.pythonhosted.org/packages/bf/ef/467a8df76891ea50bdc4fc20b8242bff91fc00eacc3a9ad48beb8af020fc/pyosys-0.53-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:82bb77e571b6420ed5094a862b41998666a2a8c1b9fca37b5deebc206e8edcbf", size = 20911730, upload-time = "2025-05-06T08:12:16.714Z" },
+    { url = "https://files.pythonhosted.org/packages/38/72/c824f0e2882813570dabbb86d163e0f602ccae5ed553de4a434437beaccc/pyosys-0.53-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:024a9558160f2cacd27fa660716d6754287cc71137b3dc6d6e96913d5cb65f43", size = 18722081, upload-time = "2025-05-06T08:12:19.254Z" },
+    { url = "https://files.pythonhosted.org/packages/aa/fc/e8f47753dec8ed33ca2ceedbe022a46736e14537d3d0dee7f4cca42a2d28/pyosys-0.53-cp312-cp312-macosx_11_0_x86_64.whl", hash = "sha256:196fac4ab79b59137856a6db328d614eea56766a2d11ad53f56871f8f941b6f7", size = 20651141, upload-time = "2025-05-06T08:12:21.382Z" },
+    { url = "https://files.pythonhosted.org/packages/b3/31/79ff073bc9ad6bd96409eabe982f859db0c7c6201349538f96126881508d/pyosys-0.53-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:a3f94f48c838a00cf19164894f2e56daa08886fdfd7e30ddd3628784d9afbc99", size = 20367720, upload-time = "2025-05-06T08:12:24.266Z" },
+    { url = "https://files.pythonhosted.org/packages/93/54/3df8341690ae2c94c8911b040345ddcd6ad7f4930ba031903d5ab04e273b/pyosys-0.53-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:3768be98b2280b7cca7993b14054f4aaa484cbad1b581a5f942aa03fb05d8291", size = 20911647, upload-time = "2025-05-06T08:12:26.494Z" },
+    { url = "https://files.pythonhosted.org/packages/bf/18/c2b92889d8f3a18ff1bdec89fe4dda46456dd9e5fc3d05ac1ea2f3f7adfd/pyosys-0.53-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:87255179a793ff5b3980f07eaeeceb8478e003db7ba8b8836cd5c0821cd748ae", size = 18722252, upload-time = "2025-05-06T08:12:28.927Z" },
+    { url = "https://files.pythonhosted.org/packages/70/57/bb540d48ab360718c0b756f660161764efb0e70b2e6b987b18d17e5a8857/pyosys-0.53-cp313-cp313-macosx_11_0_x86_64.whl", hash = "sha256:7f75d211423d0a8867fe9c26420f7aee837d8b95f3abfe6d967cea11fa420d28", size = 20650447, upload-time = "2025-05-06T08:12:31.408Z" },
+    { url = "https://files.pythonhosted.org/packages/e0/9d/e8e01c848092afd2951eb5c5a4dbe1192c5627ec997fe8e21fedbc8f36c6/pyosys-0.53-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:0574639cfef19d4273ecd7b15d7b892f30134f7cee1db70bd860c3b77e8659a9", size = 20368133, upload-time = "2025-05-06T08:12:33.466Z" },
+    { url = "https://files.pythonhosted.org/packages/b8/02/81e709f807cd5c5d3b52af34c9ebc9263a8aec3f7e74315c2d53576da850/pyosys-0.53-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:50e81d9d71aa95242a5becfa0012acda75f879c8c2ab37b282da9551b9a984dd", size = 20911424, upload-time = "2025-05-06T08:12:35.515Z" },
+]
+
+[[package]]
+name = "setuptools"
+version = "80.4.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/95/32/0cc40fe41fd2adb80a2f388987f4f8db3c866c69e33e0b4c8b093fdf700e/setuptools-80.4.0.tar.gz", hash = "sha256:5a78f61820bc088c8e4add52932ae6b8cf423da2aff268c23f813cfbb13b4006", size = 1315008, upload-time = "2025-05-09T20:42:27.972Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b1/93/dba5ed08c2e31ec7cdc2ce75705a484ef0be1a2fecac8a58272489349de8/setuptools-80.4.0-py3-none-any.whl", hash = "sha256:6cdc8cb9a7d590b237dbe4493614a9b75d0559b888047c1f67d49ba50fc3edb2", size = 1200812, upload-time = "2025-05-09T20:42:25.325Z" },
+]
+
+[[package]]
+name = "verai"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "pyosys" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "pyosys", specifier = ">=0.53" }]
+
+[[package]]
+name = "wheel"
+version = "0.45.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/8a/98/2d9906746cdc6a6ef809ae6338005b3f21bb568bea3165cfc6a243fdc25c/wheel-0.45.1.tar.gz", hash = "sha256:661e1abd9198507b1409a20c02106d9670b2576e916d58f520316666abca6729", size = 107545, upload-time = "2024-11-23T00:18:23.513Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0b/2c/87f3254fd8ffd29e4c02732eee68a83a1d3c346ae39bc6822dcbcb697f2b/wheel-0.45.1-py3-none-any.whl", hash = "sha256:708e7481cc80179af0e556bbf0cc00b8444c7321e2700b8d8580231d13017248", size = 72494, upload-time = "2024-11-23T00:18:21.207Z" },
+]
