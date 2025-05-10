@@ -4,6 +4,8 @@
 from pyosys import libyosys as ys
 from pathlib import Path
 from argparse import ArgumentParser
+import json
+import multiprocessing
 
 def make_training_case(verilog_file: Path, case_id: str = ""):
     """
@@ -14,25 +16,30 @@ def make_training_case(verilog_file: Path, case_id: str = ""):
     """
 
     if not case_id:
-        case_id = verilog_file.stem
-    # Create a new Yosys design
-    design = ys.Design()
-
-    # Read the input Verilog file
-    ys.run_pass(f"read_verilog {verilog_file}", design)
-
-    # Perform synthesis
-    ys.run_pass("synth", design)
-
-    # Write the synthesized netlist to a file
+        case_id = verilog_file.parent.stem
+    
     output_file = Path("synthesized", verilog_file.stem).with_suffix(".synth.v")
-    ys.run_pass(f"write_verilog {output_file}", design)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
 
+    design = ys.Design()
+    ys.run_pass(f"read_verilog {verilog_file}", design)
+    ys.run_pass("synth", design)
+    ys.run_pass(f"write_verilog {output_file}", design)
     print(f"Synthesis complete. Output written to {output_file}")
 
-    training_case = {"question": ouput_file.read_text(), "answer": verilog_file.read_text()}
+    synth_out = (output_file.read_text()
+        .replace("\\", "\\\\")
+        .replace("\n", "\\n")
+        .replace("\"", "\\\"")
+        .replace("\r", "\\r")
+        .replace("\t", "\\t")
+        .replace("\b", "\\b")
+        .replace("\f", "\\f")
+    )
 
+    training_case = {"question": synth_out, "answer": verilog_file.read_text()}
     training_file = Path("training", f"{case_id}_{verilog_file.stem}").with_suffix(".json")
+    training_file.write_text(json.dumps(training_case))
 
 
 def make_training_cases(input_dir: Path, case_id: str = ""):
@@ -49,12 +56,24 @@ def make_training_cases(input_dir: Path, case_id: str = ""):
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Iterate over all Verilog files in the input directory
-    for verilog_file in input_dir.glob("*.v"):
+    with multiprocessing.Pool(processes=4) as pool:
         try:
-            make_training_case(verilog_file, case_id)
-        except Exception as e:
-            print(f"Error processing {verilog_file}: {e}")
-            continue
+            pool.imap_unordered(make_training_case, input_dir.glob("*.v"))
+        except BaseException as e:
+            print(f"Thing machine broke {e}")
+        finally:
+            pass
+            # pool.apply()
+            pool.close()
+            pool.join()
+        #     pool.close()
+        #     pool.join()
+            # try:
+            #     pool.make_training_case(verilog_file, case_id)
+            # except:
+            #     print(f"Error processing {verilog_file}. Skipping.")
+            # else:
+            #     print(f"Training case created for {verilog_file}")
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="Synthesize Verilog files and create training cases.")
