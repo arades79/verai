@@ -8,3 +8,7 @@ wheels/
 
 # Virtual environments
 .venv
+
+# raw designs and synthesis
+synthesized
+designs

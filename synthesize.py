@@ -30,20 +30,17 @@ def make_training_case(verilog_file: Path, case_id: str = ""):
 
     def escape(s: str) -> str:
         return (
-            s.replace("\\", "\\\\")
-            .replace("\n", "\\n")
-            .replace('"', '\\"')
-            .replace("\r", "\\r")
-            .replace("\t", "\\t")
-            .replace("\b", "\\b")
-            .replace("\f", "\\f")
+            s
+            # .replace("\\", "\\\\")
+            # .replace("\n", "\\n")
+            # .replace('"', '\\"')
+            # .replace("\r", "\\r")
+            # .replace("\t", "\\t")
+            # .replace("\b", "\\b")
+            # .replace("\f", "\\f")
         )
 
-    pre_synth = escape(verilog_file.read_text())
-
-    synth_out = escape(output_file.read_text())
-
-    training_case = {"question": synth_out, "answer": pre_synth}
+    training_case = {"question": output_file.read_text(), "answer": verilog_file.read_text()}
     training_file = Path("training", f"{case_id}_{verilog_file.stem}").with_suffix(
         ".json"
     )
