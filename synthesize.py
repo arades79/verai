@@ -6,6 +6,7 @@ from pathlib import Path
 from argparse import ArgumentParser
 import json
 import multiprocessing
+import itertools
 
 
 def make_training_case(verilog_file: Path, case_id: str = ""):
@@ -40,7 +41,10 @@ def make_training_case(verilog_file: Path, case_id: str = ""):
             # .replace("\f", "\\f")
         )
 
-    training_case = {"question": output_file.read_text(), "answer": verilog_file.read_text()}
+    training_case = {
+        "question": output_file.read_text(),
+        "answer": verilog_file.read_text(),
+    }
     training_file = Path("training", f"{case_id}_{verilog_file.stem}").with_suffix(
         ".json"
     )
@@ -61,24 +65,14 @@ def make_training_cases(input_dir: Path, case_id: str = ""):
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Iterate over all Verilog files in the input directory
-    with multiprocessing.Pool(processes=4) as pool:
+    with multiprocessing.Pool() as pool:
+        input_files = input_dir.glob("*.v")
         try:
-            pool.imap_unordered(make_training_case, input_dir.glob("*.v"))
+            results = pool.map_async(make_training_case, input_files)
         except BaseException as e:
             print(f"Thing machine broke {e}")
-        finally:
-            pass
-            # pool.apply()
-            pool.close()
-            pool.join()
-        #     pool.close()
-        #     pool.join()
-        # try:
-        #     pool.make_training_case(verilog_file, case_id)
-        # except:
-        #     print(f"Error processing {verilog_file}. Skipping.")
-        # else:
-        #     print(f"Training case created for {verilog_file}")
+        else:
+            results.wait(10)
 
 
 if __name__ == "__main__":
@@ -91,10 +85,8 @@ if __name__ == "__main__":
         help="Path to the input directory containing Verilog files.",
     )
     parser.add_argument(
-        "-i", "--case-id", type=str, help="Case ID for the training cases."
+        "-i", "--case-id", default="", type=str, help="Case ID for the training cases."
     )
     args = parser.parse_args()
-    make_training_cases(
-        args.input_dir, args.case_id
-    ) if args.case_id else make_training_cases(args.input_dir)
+    make_training_cases(args.input_dir, args.case_id)
     print(f"Training cases created in {Path('training').absolute()}")
